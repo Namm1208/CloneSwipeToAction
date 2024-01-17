@@ -3,4 +3,6 @@
     <item name="cart_image" type="id" />
     <item name="recycle_test" type="id" />
     <item name="recycler" type="id" />
+    <item name="reveal_right" type="id" />
+    <item name="reveal_left" type="id" />
 </resources>

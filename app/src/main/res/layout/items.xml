@@ -1,58 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_height">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <!-- this view reveals when swipe right -->
-    <RelativeLayout
-        android:tag="reveal-right"
-        android:background="@color/accent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/revealRightImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:src="@mipmap/ic_favorite_black_24dp"
-            app:tint="@color/icons" />
-    </RelativeLayout>
-
-    <!-- this view reveals when swipe left -->
-    <RelativeLayout
-        android:tag="reveal-left"
-        android:background="@color/primary"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/revealLeftImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:src="@mipmap/ic_delete_black_24dp"
-            app:tint="@color/icons"/>
-    </RelativeLayout>
-
-    <!-- this is the item front view -->
+    <!-- This is the item front view -->
     <RelativeLayout
         android:tag="front"
         android:background="@color/item_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="@dimen/item_padding">
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/ic_launcher"/> <!-- Thay đổi thành ảnh nguồn của bạn -->
 
         <TextView
             android:id="@+id/title"
@@ -72,9 +38,45 @@
             android:textSize="14dp" />
     </RelativeLayout>
 
-    <!-- just a divider -->
+    <!-- This view reveals when swipe right -->
+    <RelativeLayout
+        android:tag="reveal-right"
+        android:background="@color/accent"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <ImageView
+            android:id="@+id/revealRightImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/ic_favorite_black_24dp"
+            app:tint="@color/icons" />
+    </RelativeLayout>
+
+    <!-- This view reveals when swipe left -->
+    <RelativeLayout
+        android:tag="reveal-left"
+        android:background="@color/primary"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <ImageView
+            android:id="@+id/revealLeftImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/ic_delete_black_24dp"
+            app:tint="@color/icons"/>
+    </RelativeLayout>
+
+    <!-- Just a divider -->
     <View android:background="@color/divider"
         android:layout_width="fill_parent"
         android:layout_height="0.5dp" />
 
-</FrameLayout>
+</LinearLayout>
