@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recycler);
+        recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         initializeBooks();
 
         // Khởi tạo adapter
-        adapter = new BooksAdapter(books, Glide.with(this));
+        adapter = new BooksAdapter(books, (SwipeToAction.SwipeListener<Book>) Glide.with(this));
 
         // Thiết lập SwipeToAction
         swipeToAction = new SwipeToAction(recyclerView, new SwipeToAction.SwipeListener<Book>() {

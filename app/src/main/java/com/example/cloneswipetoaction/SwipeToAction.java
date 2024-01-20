@@ -10,12 +10,39 @@ import com.example.cloneswipetoaction.Model.Book;
 
 public class SwipeToAction {
 
-    public SwipeToAction(RecyclerView recyclerView, SwipeListener<Book> bookSwipeListener) {
+    private final RecyclerView recyclerView;
+    private final SwipeListener<Book> bookSwipeListener;
 
+    public SwipeToAction(RecyclerView recyclerView, SwipeListener<Book> bookSwipeListener) {
+        this.recyclerView = recyclerView;
+        this.bookSwipeListener = bookSwipeListener;
+        attachSwipe();
     }
 
     public ItemTouchHelper.Callback getCallback() {
-        return null;
+        return new ItemTouchHelper.Callback() {
+            @Override
+            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                // Implement your logic for movement flags here
+                return 0;
+            }
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                // Implement your logic for item move here
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                // Implement your logic for item swipe here
+            }
+        };
+    }
+
+    private void attachSwipe() {
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(getCallback());
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     public interface SwipeListener<T> {
@@ -31,12 +58,10 @@ public class SwipeToAction {
         public View revealLeft;
         public View revealRight;
 
-        public ViewHolder() {
-            super();
-            View v = null;
-            super(v);
+        public ViewHolder(View itemView, SwipeListener<T> itemSwipeListener) {
+            super(itemView);
 
-            ViewGroup vg = (ViewGroup) v;
+            ViewGroup vg = (ViewGroup) itemView;
             front = vg.findViewWithTag("front");
             revealLeft = vg.findViewWithTag("reveal-left");
             revealRight = vg.findViewWithTag("reveal-right");
@@ -66,6 +91,30 @@ public class SwipeToAction {
                     }
                 }
             }
+
+            setClickListener(itemSwipeListener);
+        }
+
+        private void setClickListener(final SwipeListener<T> itemSwipeListener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemSwipeListener != null) {
+                        itemSwipeListener.onClick(data);
+                    }
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (itemSwipeListener != null) {
+                        itemSwipeListener.onLongClick(data);
+                        return true;
+                    }
+                    return false;
+                }
+            });
         }
 
         public View getFront() {
@@ -88,5 +137,4 @@ public class SwipeToAction {
 
         public abstract void onItemClear();
     }
-
 }
